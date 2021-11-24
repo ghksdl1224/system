@@ -78,6 +78,10 @@ void main(int argc, char* argv[]){
 		perror("mmap failed");
 		exit(1);
 		}
+	if(mlock(shmaddr, SHMSIZE) != 0) {
+		perror("mlock failed");
+		exit(1);
+		}	
 	strcat(path, "_copy");
 	if((copy_fp = fopen(path,"w")) == NULL){
 		perror("fopen");
