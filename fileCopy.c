@@ -22,7 +22,6 @@
 		perror("shm_unlick failed");
 		exit(1);
 		}
-	}
 		if (sem_close(semd) == -1) {
 			perror("sen_close failed");
 			exit(1);
@@ -38,6 +37,8 @@
 		int ret;
 		if((ret = sem_trywait(semd)) != 0 && errno == EAGAIN)
 			sem_wait(semd);
+		else if (ret !=0){
+			perror("sem_trywait failed");
 			exit(1);
 			}
 		}
@@ -46,5 +47,6 @@
 		if(sem_post(semd) != 0 ) {
 			perror("sem_post failed");\
 			exit(1);
+			}
 			}
 		
